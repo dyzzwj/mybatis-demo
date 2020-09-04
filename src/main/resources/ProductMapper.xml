@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dyzwj.mybatis.mapper.ProductMapper" >
+
+    <select id="selectProductList" resultType="com.dyzwj.mybatis.bean.Product">
+
+        select * from product
+    </select>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into product(product_name,product_content,price,sort,false_sales,category_id,`type`,state)
+        values
+        <foreach collection="list" item="product" separator=",">
+            (
+                #{product.productName},
+                #{product.productContent},
+                #{product.price},
+                #{product.sort},
+                #{product.falseSales},
+                #{product.categoryId},
+                #{product.type},
+                #{product.state}
+            )
+        </foreach>
+
+    </insert>
+
+
+
+</mapper>
